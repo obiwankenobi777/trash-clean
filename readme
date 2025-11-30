@@ -1,0 +1,22 @@
+-----------------------------------------------------------------------------
+ trash_manager.sh  - Gerenciador do diretório Trash
+
+ Autor: Obi-Wan Kenobi
+ email: ordemjedi7@gmail.com
+ github: https://github.com/obiwankenobi777
+
+-----------------------------------------------------------------------------
+ DESCRIÇÃO:
+
+ Este script consiste em um gerenciador de arquivos contidos no diretório
+ "Trash".
+
+-----------------------------------------------------------------------------
+ OBJETIVO:
+
+ O objetivo para a criação de tal aplicativo consiste no fato de que alguns arquivos
+ excluidos pelo yazi, por exemplo, não são removidos do sistema e sim movidos
+ para o diretório Trash. Sendo assim, é importante o conhecimento do conteúdo
+ contido neste diretório, bem como, o seu gerenciamento.
+
+-----------------------------------------------------------------------------

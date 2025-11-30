@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+TRASH="$HOME/.local/share/Trash"
+cd "$TRASH"
+declare -A trash_info
+
+count_files() {
+    local sum_files=0
+    for dir in $(ls); do
+        local number=$(ls $dir | wc -l)
+        trash_info["$dir"]=$number
+        sum_files=$(($sum_files + $number))
+    done
+    trash_info["Trash"]=$sum_files
+}
+
+# clean_trash() {
+# }
+
+show_trash() {
+    for key in $(printf "%s\n" "${!trash_info[@]}" | sort); do
+        printf "In Trash/%s -> %d file(s)\n" "$key" "${trash_info[$key]}"
+    done
+
+    local total_dirs=$((${#trash_info[@]} - 1))
+    printf "\nNumber of dirs in Trash: $total_dirs\n"
+    printf "Total of files in Trash: ${trash_info["Trash"]}\n"
+}
+
+main() {
+    count_files
+    # clean_trash
+    show_trash
+}
+main
