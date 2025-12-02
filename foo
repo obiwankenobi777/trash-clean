@@ -13,32 +13,29 @@ count_files() {
         trash_info["$dir"]=$number
         sum_files=$(($sum_files + $number))
     done
-    trash_info["Trash"]=$sum_files
 }
 
 clean_trash() {
     echo "----------- Clean Trash ------------"
     for key in "${!trash_info[@]}"; do
-        if [[ $key = "Trash" ]]; then
+        if [[ ${trash_info[$key]} -eq 0 ]]; then
             continue
         fi
-        echo "$key -> ${trash_info[$key]}"
+        rm ./$key/*
+        trash_info[$key]=0
+        sum_files=0
     done
-    echo "------------------------------------"
 }
 
 show_trash() {
     echo "----------- Show Trash ------------"
     for key in $(printf "%s\n" "${!trash_info[@]}" | sort); do
-        if [[ $key = "Trash" ]]; then
-            break
-        fi
         printf "In Trash/%s -> %d file(s)\n" "$key" "${trash_info[$key]}"
     done
 
-    local total_dirs=$((${#trash_info[@]} - 1))
+    local total_dirs=$((${#trash_info[@]}))
     printf "\nNumber of dirs in Trash: $total_dirs\n"
-    printf "Total of files in Trash: ${trash_info["Trash"]}\n"
+    printf "Total of files in Trash: $sum_files\n"
     echo "------------------------------------"
 }
 
@@ -47,5 +44,7 @@ main() {
     show_trash
     echo
     clean_trash
+    echo
+    show_trash
 }
 main
